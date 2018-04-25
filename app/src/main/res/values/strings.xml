@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Android_Me</string>
+    <string name="randomButtonTitle">Random</string>
+    <string name="imagePartContentDescription">Body part</string>
 </resources>

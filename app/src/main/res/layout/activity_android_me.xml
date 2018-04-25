@@ -29,7 +29,24 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin">
 
+        <FrameLayout
+            android:id="@+id/headContainer"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
 
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/bodyContainer"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+        </FrameLayout>
+        <FrameLayout
+            android:id="@+id/legsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="180dp">
+
+        </FrameLayout>
     </LinearLayout>
 
 </ScrollView>
