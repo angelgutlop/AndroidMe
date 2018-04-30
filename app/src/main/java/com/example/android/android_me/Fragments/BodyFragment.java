@@ -1,4 +1,4 @@
-package com.example.android.android_me.ui;
+package com.example.android.android_me.Fragments;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +17,7 @@ import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class BodyFragment extends Fragment implements View.OnClickListener {
+
     List<Integer> bodyItemList = null;
     private Integer nBody = 0;
 
@@ -47,7 +48,6 @@ public class BodyFragment extends Fragment implements View.OnClickListener {
         bodyImageView.setOnClickListener(this);
 
         setImageView(nBody);
-
 
         return bodyView;
     }
@@ -81,13 +81,18 @@ public class BodyFragment extends Fragment implements View.OnClickListener {
         this.nBody = nBody;
     }
 
+    public void displayElement(int nelement) {
+        this.nBody = nelement;
+        setImageView(nelement);
+    }
+
     public Integer getDisplayElement() {
         return this.nBody;
     }
 
     Handler mHandler = new Handler();
 
-    volatile AtomicInteger cont = new AtomicInteger(0);
+    AtomicInteger cont = new AtomicInteger(0);
 
     public void displayRandomElement() {
 
@@ -101,7 +106,6 @@ public class BodyFragment extends Fragment implements View.OnClickListener {
                     nBody = getRandomElementIndex();
                     setImageView(nBody);
 
-
                     if (cont.incrementAndGet() >= 10) {
                         cont.getAndSet(0);
                         mHandler.removeCallbacks(this);
@@ -110,9 +114,7 @@ public class BodyFragment extends Fragment implements View.OnClickListener {
             }
         };
 
-
         mHandler.post(runnable);
-
 
     }
 

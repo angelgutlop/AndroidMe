@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="headIndex">headIndex</string>
+    <string name="bodyIndex">bodyIndex</string>
+    <string name="legsIndex">legsIndex</string>
+</resources>

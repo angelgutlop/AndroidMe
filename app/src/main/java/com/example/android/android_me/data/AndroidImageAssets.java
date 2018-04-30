@@ -1,18 +1,18 @@
 /*
-* Copyright (C) 2017 The Android Open Source Project
-*
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
-*
-*  	http://www.apache.org/licenses/LICENSE-2.0
-*
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
-*/
+ * Copyright (C) 2017 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *  	http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 
 package com.example.android.android_me.data;
 
@@ -77,7 +77,7 @@ public class AndroidImageAssets {
         addAll(bodies);
         addAll(legs);
     }};
-    
+
 
     // Getter methods that return lists of all head images, body images, and leg images
 
@@ -96,5 +96,34 @@ public class AndroidImageAssets {
     // Returns a list of all the images combined: heads, bodies, and legs in that order
     public static List<Integer> getAll() {
         return all;
+    }
+
+
+    public static ImageAndroid getTypeOfImage_AllArray(int id) {
+
+        int sizeHeads = heads.size();
+        int sizeHeadBody = sizeHeads + bodies.size();
+        int siseHeadBodyLegs = sizeHeadBody + legs.size();
+
+        ImageAndroid imageAndroid = new ImageAndroid();
+
+        if (id < sizeHeads) {
+
+            imageAndroid.image_type = ImageAndroid.IMAGE_TYPE.HEAD;
+            imageAndroid.innerIndex = id;
+
+        } else if (id < sizeHeadBody) {
+
+            imageAndroid.image_type = ImageAndroid.IMAGE_TYPE.BODY;
+            imageAndroid.innerIndex = id - sizeHeads;
+
+        } else if (id < siseHeadBodyLegs) {
+
+            imageAndroid.image_type = ImageAndroid.IMAGE_TYPE.LEGS;
+            imageAndroid.innerIndex = id - sizeHeadBody;
+
+        }
+
+        return imageAndroid;
     }
 }

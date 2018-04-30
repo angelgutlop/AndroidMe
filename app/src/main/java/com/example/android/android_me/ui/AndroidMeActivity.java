@@ -16,6 +16,7 @@
 
 package com.example.android.android_me.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.android.android_me.Fragments.BodyFragment;
 import com.example.android.android_me.R;
 import com.example.android.android_me.data.AndroidImageAssets;
 
@@ -38,8 +40,7 @@ public class AndroidMeActivity extends AppCompatActivity {
     private final String bodyIdTag = "bodyid";
     private final String leggsIdTag = "legid";
 
-
-    FragmentManager fragmentManager = null;
+    FragmentManager fragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,24 @@ public class AndroidMeActivity extends AppCompatActivity {
         bodyFragment = (BodyFragment) fragmentManager.findFragmentByTag(bodyIdTag);
         legsFragment = (BodyFragment) fragmentManager.findFragmentByTag(leggsIdTag);
 
+        int headIndex = 0;
+        int bodyIndex = 0;
+        int legsIndex = 0;
+
+
+        Intent intent = getIntent();
+        if (intent != null) {
+
+            String key = getResources().getString(R.string.headIndex);
+            if (intent.hasExtra(key)) headIndex = intent.getIntExtra(key, 0);
+
+            key = getResources().getString(R.string.bodyIndex);
+            if (intent.hasExtra(key)) bodyIndex = intent.getIntExtra(key, 0);
+
+            key = getResources().getString(R.string.legsIndex);
+            if (intent.hasExtra(key)) legsIndex = intent.getIntExtra(key, 0);
+
+        }
 
         if (headFragment == null) {
 
@@ -61,13 +80,16 @@ public class AndroidMeActivity extends AppCompatActivity {
             legsFragment = new BodyFragment();
 
             headFragment.setBodyItemList(AndroidImageAssets.getHeads());
-            headFragment.setDisplayElementRandom();
+            // headFragment.setDisplayElementRandom();
+            headFragment.setDisplayElement(headIndex);
 
             bodyFragment.setBodyItemList(AndroidImageAssets.getBodies());
-            bodyFragment.setDisplayElementRandom();
+            //bodyFragment.setDisplayElementRandom();
+            bodyFragment.setDisplayElement(bodyIndex);
 
             legsFragment.setBodyItemList(AndroidImageAssets.getLegs());
-            legsFragment.setDisplayElementRandom();
+            //legsFragment.setDisplayElementRandom();
+            legsFragment.setDisplayElement(legsIndex);
 
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.headContainer, headFragment, headIdTag);
@@ -81,6 +103,7 @@ public class AndroidMeActivity extends AppCompatActivity {
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
+
         outState.putInt(headIdTag, headFragment.getDisplayElement());
         outState.putInt(bodyIdTag, bodyFragment.getDisplayElement());
         outState.putInt(leggsIdTag, legsFragment.getDisplayElement());
